@@ -74,31 +74,37 @@ public class GridClass
         switch(d)
         {
             case Direction.LEFT:
-                //Primero vaciar las posiciones anteriores
-                for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                if (CheckCollision(ref p, d))
                 {
-                    grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = null;
-                }
-                //Mover la pieza
-                p.transform.position += new Vector3(-1, 0, 0);
-                //Luego reasignar posiciones en el grid
-                for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
-                {
-                    grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = p.transform.GetChild(0).transform.GetChild(i).gameObject;
+                    //Primero vaciar las posiciones anteriores
+                    for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                    {
+                        grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = null;
+                    }
+                    //Mover la pieza
+                    p.transform.position += new Vector3(-1, 0, 0);
+                    //Luego reasignar posiciones en el grid
+                    for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                    {
+                        grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = p.transform.GetChild(0).transform.GetChild(i).gameObject;
+                    }
                 }
                 break;
             case Direction.RIGHT:
-                //Primero vaciar las posiciones anteriores
-                for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                if (CheckCollision(ref p, d))
                 {
-                    grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = null;
-                }
-                //Mover la pieza
-                p.transform.position += new Vector3(1, 0, 0);
-                 //Luego reasignar posiciones en el grid
-                for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
-                {
-                    grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = p.transform.GetChild(0).transform.GetChild(i).gameObject;
+                    //Primero vaciar las posiciones anteriores
+                    for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                    {
+                        grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = null;
+                    }
+                    //Mover la pieza
+                    p.transform.position += new Vector3(1, 0, 0);
+                    //Luego reasignar posiciones en el grid
+                    for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                    {
+                        grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = p.transform.GetChild(0).transform.GetChild(i).gameObject;
+                    }
                 }
                 break;
             case Direction.DOWN:
@@ -150,10 +156,44 @@ public class GridClass
         switch(d)
         {
             case Direction.LEFT:
+                for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                {
+                    if (0 <= (int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x - 1)
+                    {
+                        if (grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x - 1)] != null)
+                        {
+                            if (grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x - 1)].transform.parent != p.transform.GetChild(0))
+                            {
+                                canMove = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        canMove = false;
+                    }
 
+                }
                 break;
             case Direction.RIGHT:
+                for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+                {
+                    if (grid[0].row.Count > Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x + 1))
+                    {
+                        if (grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x + 1)] != null)
+                        {
+                            if (grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x + 1)].transform.parent != p.transform.GetChild(0))
+                            {
+                                canMove = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        canMove = false;
+                    }
 
+                }
                 break;
             case Direction.DOWN:
                 for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
