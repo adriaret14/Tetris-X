@@ -141,7 +141,224 @@ public class GridClass
 
     public void RotatePiece(ref GameObject p)
     {
+        Piece piece = p.GetComponent<Piece>();
+        switch (piece.pType)
+        {
+            case PieceType.BAR:
+                if(piece.r==0 || piece.r==2)
+                {
+                    if (CanRotatePiece(p, 1))
+                    {
+                        ApplyRotation(ref p, 1);
+                    }
+                }
+                else
+                {
+                   if(CanRotatePiece(p, 0))
+                    {
+                        ApplyRotation(ref p, 0);
+                    }
+                }
+                break;
+            case PieceType.BOX:
 
+                break;
+            case PieceType.L:
+                if (piece.r == 0)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 1))
+                    {
+                        ApplyRotation(ref p, 1);
+                    }
+                }
+                else if (piece.r == 1)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 2))
+                    {
+                        ApplyRotation(ref p, 2);
+                    }
+                }
+                else if (piece.r == 2)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 3))
+                    {
+                        ApplyRotation(ref p, 3);
+                    }
+                }
+                else
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 0))
+                    {
+                        ApplyRotation(ref p, 0);
+                    }
+                }
+                break;
+            case PieceType.L_INVERTED:
+                if (piece.r == 0)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 1))
+                    {
+                        ApplyRotation(ref p, 1);
+                    }
+                }
+                else if (piece.r == 1)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 2))
+                    {
+                        ApplyRotation(ref p, 2);
+                    }
+                }
+                else if (piece.r == 2)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 3))
+                    {
+                        ApplyRotation(ref p, 3);
+                    }
+                }
+                else
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 0))
+                    {
+                        ApplyRotation(ref p, 0);
+                    }
+                }
+                break;
+            case PieceType.S:
+                if (piece.r == 0 || piece.r == 2)
+                {
+                    if (CanRotatePiece(p, 1))
+                    {
+                        ApplyRotation(ref p, 1);
+                    }
+                }
+                else
+                {
+                    if (CanRotatePiece(p, 0))
+                    {
+                        ApplyRotation(ref p, 0);
+                    }
+                }
+                break;
+            case PieceType.S_INVERTED:
+                if (piece.r == 0)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 1))
+                    {
+                        ApplyRotation(ref p, 1);
+                    }
+                }
+                else if (piece.r == 1)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 2))
+                    {
+                        ApplyRotation(ref p, 2);
+                    }
+                }
+                else if (piece.r == 2)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 3))
+                    {
+                        ApplyRotation(ref p, 3);
+                    }
+                }
+                else
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 0))
+                    {
+                        ApplyRotation(ref p, 0);
+                    }
+                }
+                break;
+            case PieceType.T:
+                if (piece.r == 0)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 1))
+                    {
+                        ApplyRotation(ref p, 1);
+                    }
+                }
+                else if(piece.r == 1)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 2))
+                    {
+                        ApplyRotation(ref p, 2);
+                    }
+                }
+                else if(piece.r == 2)
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 3))
+                    {
+                        ApplyRotation(ref p, 3);
+                    }
+                }
+                else
+                {
+                    Debug.Log(CanRotatePiece(p, 1));
+                    if (CanRotatePiece(p, 0))
+                    {
+                        ApplyRotation(ref p, 0);
+                    }
+                }
+                break;
+        }
+    }
+
+    private bool CanRotatePiece(GameObject p, int futureRot)
+    {
+        bool canRotate = true;
+
+        for(int i=1; i<p.transform.GetChild(0).transform.childCount; i++)
+        {
+            if((Mathf.Abs((int)p./*transform.GetChild(0).transform.GetChild(0).*/transform.position.y + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].y) < grid.Count) && (((int)p./*transform.GetChild(0).transform.GetChild(0).*/transform.position.x + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].x >= 0) && (int)p./*transform.GetChild(0).transform.GetChild(0).*/transform.position.x + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].x < grid[0].row.Count))
+            {
+                if (grid[Mathf.Abs((int)p./*transform.GetChild(0).transform.GetChild(0).*/transform.position.y + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].y)].row[(int)p./*transform.GetChild(0).transform.GetChild(0).*/transform.position.x + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].x] != null)
+                {
+                    if (grid[Mathf.Abs((int)p./*transform.GetChild(0).transform.GetChild(0).*/transform.position.y + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].y)].row[(int)p./*transform.GetChild(0).transform.GetChild(0).*/transform.position.x + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].x].transform.parent != p.transform.GetChild(0))
+                    {
+                        canRotate = false;
+                    }
+                }
+            }
+            else
+            {
+                canRotate = false;
+            }
+            
+        }
+
+        return canRotate;
+    }
+
+    private void ApplyRotation(ref GameObject p, int futureRot)
+    {
+        for(int i=0; i< p.transform.GetChild(0).transform.childCount; i++)
+        {
+            grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] = null;
+            p.transform.GetChild(0).transform.GetChild(i).transform.position = new Vector3(p.transform.GetChild(0).transform.GetChild(0).transform.position.x + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].x, p.transform.GetChild(0).transform.GetChild(0).transform.position.y + (int)p.transform.GetChild(0).transform.GetChild(i).GetComponent<RotationInfo>().rotations[futureRot].y, 0);
+            //grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[(int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x] = p.transform.GetChild(0).transform.GetChild(i).gameObject;
+        }
+
+        for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+        {
+            grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[(int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x] = p.transform.GetChild(0).transform.GetChild(i).gameObject;
+        }
+
+        p.GetComponent<Piece>().r = futureRot;
     }
 
     public void AcceleratePiece(ref GameObject p)

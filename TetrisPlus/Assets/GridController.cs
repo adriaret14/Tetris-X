@@ -97,5 +97,11 @@ public class GridController : MonoBehaviour
             //InstaDrop
             Debug.Log("Drop Instantaneo");
         }
+
+        if(Input.GetButtonDown("Rotate"))
+        {
+            //Rotate piece
+            gridClass.RotatePiece(ref currentPiece);
+        }
     }
 }
