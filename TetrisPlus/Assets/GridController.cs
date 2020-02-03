@@ -53,6 +53,7 @@ public class GridController : MonoBehaviour
         {
             if(gridClass.MovePiece(ref currentPiece, Direction.DOWN))
             {
+                gridClass.CheckLine(ref currentPiece);
                 SpawnNewPiece();
             }
 

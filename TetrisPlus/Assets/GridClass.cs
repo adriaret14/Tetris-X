@@ -437,6 +437,65 @@ public class GridClass
         return canMove;
     }
 
+    public void CheckLine(ref GameObject p)
+    {
+        List<int> linesDone = new List<int>();
+
+        Debug.Log("Revisando si se ha hecho una linea");
+        for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+        {
+            bool lineDone = true;
+            for (int j = 0; j < grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row.Count; j++)
+            {
+                if(grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)].row[j]==null)
+                {
+                    lineDone = false;
+                }
+            }
+
+            if(lineDone)
+            {
+                //Debug.Log("Line: " + Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y) + " done!!");
+                if(!linesDone.Contains(Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y)))
+                {
+                    linesDone.Add(Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y));
+                }   
+            }
+        }
+
+        for(int i=0; i<linesDone.Count; i++)
+        {
+            Debug.Log("Line " + i + " done");
+        }
+
+        DestroyLines(linesDone);
+    }
+
+    private void DestroyLines(List<int> lines)
+    {
+        Debug.Log("A destruir lineas");
+        for(int i=0; i<lines.Count; i++)
+        {
+            int c = grid[lines[i]].row.Count;
+            for (int j=0; j<grid[lines[i]].row.Count; j++)
+            {
+                GameObject.Destroy(grid[lines[i]].row[j]);
+            }
+           
+            grid[lines[i]].row=new List<GameObject>();
+            for(int x=0; x<c; x++)
+            {
+                grid[lines[i]].row.Add(null);
+            }
+        }
+        MoveDownFullStack(lines.Count);
+    }
+
+    private void MoveDownFullStack(int c)
+    {
+        //Mover todas las piezas hacia abajo para seguir jugando
+    }
+
     public void DrawTransLucidGrid(GameObject placeHoldersParent)
     {
         for(int i=0; i<grid.Count; i++)
