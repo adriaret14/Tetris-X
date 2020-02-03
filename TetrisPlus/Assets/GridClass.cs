@@ -468,10 +468,10 @@ public class GridClass
             Debug.Log("Line " + i + " done");
         }
 
-        DestroyLines(linesDone);
+        DestroyLines(linesDone, p);
     }
 
-    private void DestroyLines(List<int> lines)
+    private void DestroyLines(List<int> lines, GameObject p)
     {
         Debug.Log("A destruir lineas");
         for(int i=0; i<lines.Count; i++)
@@ -488,12 +488,33 @@ public class GridClass
                 grid[lines[i]].row.Add(null);
             }
         }
-        MoveDownFullStack(lines.Count);
+
+        if(lines.Count>0)
+        {
+            MoveDownFullStack(lines, p);
+        }
+        
     }
 
-    private void MoveDownFullStack(int c)
+    private void MoveDownFullStack(List<int> l, GameObject p)
     {
-        //Mover todas las piezas hacia abajo para seguir jugando
+        l.Sort();
+        Debug.Log("Sorted: " + l[l.Count - 1]);
+        for(int i=l.Count-1; i>=0; i--)
+        {
+            for(int x=l[i]; x>=0; x--)
+            {
+                for (int j = 0; j < grid[x].row.Count; j++)
+                {
+                    if (grid[x].row[j] != null && grid[x].row[j].gameObject.transform.parent.transform.parent != p)
+                    {
+                        grid[Mathf.Abs((int)grid[x].row[j].gameObject.transform.position.y - 1)].row[j] = grid[x].row[j];
+                        grid[x].row[j].gameObject.transform.position -= new Vector3(0.0f, 1.0f, 0.0f);
+                        grid[x].row[j] = null;
+                    }
+                }
+            }
+        }
     }
 
     public void DrawTransLucidGrid(GameObject placeHoldersParent)
