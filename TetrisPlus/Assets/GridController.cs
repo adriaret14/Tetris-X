@@ -25,6 +25,8 @@ public class GridController : MonoBehaviour
     [Header("Game Settings")]
     [SerializeField] private int currentLevel;
     [SerializeField] private float currentMoveTime;
+    [SerializeField] private float auxCurrentMoveTime;
+    [SerializeField] private int contAccelerate;
     private float lastTimeMovedStandard;
     public GameObject currentPiece;
 
@@ -77,26 +79,42 @@ public class GridController : MonoBehaviour
         if(Input.GetButtonDown("Right"))
         {
             //Right
-            Debug.Log("Mover Pieza Derecha");
+            //Debug.Log("Mover Pieza Derecha");
             gridClass.MovePiece(ref currentPiece, Direction.RIGHT);
         }
         else if(Input.GetButtonDown("Left"))
         {
             //Left
-            Debug.Log("Mover Pieza Izquierda");
+            //Debug.Log("Mover Pieza Izquierda");
             gridClass.MovePiece(ref currentPiece, Direction.LEFT);
         }
 
-        if(Input.GetButtonDown("Down"))
+        if(Input.GetButton("Down"))
         {
             //Accelerate
-            Debug.Log("Acelerar Pieza");
+            //Debug.Log("Acelerar Pieza");
+            if(contAccelerate<=0)
+            {
+                contAccelerate++;
+                auxCurrentMoveTime = currentMoveTime;
+                currentMoveTime /= 2;
+            }
+        }
+
+        if(Input.GetButtonUp("Down"))
+        {
+            contAccelerate = 0;
+            if(auxCurrentMoveTime!=0)
+            {
+                currentMoveTime = auxCurrentMoveTime;
+            }
         }
 
         if(Input.GetButtonDown("Jump"))
         {
             //InstaDrop
-            Debug.Log("Drop Instantaneo");
+            //Debug.Log("Drop Instantaneo");
+            //gridClass.InstaDropPiece(ref currentPiece);
         }
 
         if(Input.GetButtonDown("Rotate"))

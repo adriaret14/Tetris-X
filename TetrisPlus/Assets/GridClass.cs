@@ -134,9 +134,33 @@ public class GridClass
         return stackPiece;
     }
 
-    public void InstaDropPiece(ref GameObject p)
+    public void InstaDropPiece(ref GameObject p) //se queda monger, hay que revisar que no se salga por debajo de la grid  y seguir mirando
     {
+        bool canGoDown = true;
+        bool auxFlag = true;
+        int linesDown = 0;
 
+        while (canGoDown)
+        {
+            for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
+            {
+                auxFlag = true;
+                if(grid[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.y - 1)].row[Mathf.Abs((int)p.transform.GetChild(0).transform.GetChild(i).transform.position.x)] != null)
+                {
+                    auxFlag = false;
+                }
+            }
+
+            if(!auxFlag)
+            {
+                canGoDown = false;
+            }
+            else
+            {
+                linesDown++;
+            }
+        }
+        
     }
 
     public void RotatePiece(ref GameObject p)
@@ -361,11 +385,6 @@ public class GridClass
         p.GetComponent<Piece>().r = futureRot;
     }
 
-    public void AcceleratePiece(ref GameObject p)
-    {
-
-    }
-
     public bool CheckCollision(ref GameObject p, Direction d)
     {
         bool canMove = true;
@@ -468,12 +487,16 @@ public class GridClass
             Debug.Log("Line " + i + " done");
         }
 
-        DestroyLines(linesDone, p);
+        if(linesDone.Count>0)
+        {
+            DestroyLines(linesDone, p);
+        }
+        
     }
 
     private void DestroyLines(List<int> lines, GameObject p)
     {
-        Debug.Log("A destruir lineas");
+        //Debug.Log("A destruir lineas");
         for(int i=0; i<lines.Count; i++)
         {
             int c = grid[lines[i]].row.Count;
@@ -496,10 +519,9 @@ public class GridClass
         
     }
 
-    private void MoveDownFullStack(List<int> l, GameObject p)
+    private void MoveDownFullStack(List<int> l, GameObject p) //Con más de triple y tetris la ultima se queda vacia pero no bajan del todo //Mirar de bajar directamente con el count
     {
         l.Sort();
-        Debug.Log("Sorted: " + l[l.Count - 1]);
         for(int i=l.Count-1; i>=0; i--)
         {
             for(int x=l[i]; x>=0; x--)
