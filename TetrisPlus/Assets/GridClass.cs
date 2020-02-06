@@ -190,7 +190,7 @@ public class GridClass
             case PieceType.L:
                 if (piece.r == 0)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 1))
                     {
                         ApplyRotation(ref p, 1);
@@ -198,7 +198,7 @@ public class GridClass
                 }
                 else if (piece.r == 1)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 2))
                     {
                         ApplyRotation(ref p, 2);
@@ -206,7 +206,7 @@ public class GridClass
                 }
                 else if (piece.r == 2)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 3))
                     {
                         ApplyRotation(ref p, 3);
@@ -214,7 +214,7 @@ public class GridClass
                 }
                 else
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 0))
                     {
                         ApplyRotation(ref p, 0);
@@ -224,7 +224,7 @@ public class GridClass
             case PieceType.L_INVERTED:
                 if (piece.r == 0)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 1))
                     {
                         ApplyRotation(ref p, 1);
@@ -232,7 +232,7 @@ public class GridClass
                 }
                 else if (piece.r == 1)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 2))
                     {
                         ApplyRotation(ref p, 2);
@@ -240,7 +240,7 @@ public class GridClass
                 }
                 else if (piece.r == 2)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 3))
                     {
                         ApplyRotation(ref p, 3);
@@ -248,7 +248,7 @@ public class GridClass
                 }
                 else
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 0))
                     {
                         ApplyRotation(ref p, 0);
@@ -274,7 +274,7 @@ public class GridClass
             case PieceType.S_INVERTED:
                 if (piece.r == 0)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 1))
                     {
                         ApplyRotation(ref p, 1);
@@ -282,7 +282,7 @@ public class GridClass
                 }
                 else if (piece.r == 1)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 2))
                     {
                         ApplyRotation(ref p, 2);
@@ -290,7 +290,7 @@ public class GridClass
                 }
                 else if (piece.r == 2)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 3))
                     {
                         ApplyRotation(ref p, 3);
@@ -298,7 +298,7 @@ public class GridClass
                 }
                 else
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 0))
                     {
                         ApplyRotation(ref p, 0);
@@ -308,7 +308,7 @@ public class GridClass
             case PieceType.T:
                 if (piece.r == 0)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 1))
                     {
                         ApplyRotation(ref p, 1);
@@ -316,7 +316,7 @@ public class GridClass
                 }
                 else if(piece.r == 1)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 2))
                     {
                         ApplyRotation(ref p, 2);
@@ -324,7 +324,7 @@ public class GridClass
                 }
                 else if(piece.r == 2)
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 3))
                     {
                         ApplyRotation(ref p, 3);
@@ -332,7 +332,7 @@ public class GridClass
                 }
                 else
                 {
-                    Debug.Log(CanRotatePiece(p, 1));
+                    //Debug.Log(CanRotatePiece(p, 1));
                     if (CanRotatePiece(p, 0))
                     {
                         ApplyRotation(ref p, 0);
@@ -460,7 +460,7 @@ public class GridClass
     {
         List<int> linesDone = new List<int>();
 
-        Debug.Log("Revisando si se ha hecho una linea");
+        //Debug.Log("Revisando si se ha hecho una linea");
         for (int i = 0; i < p.transform.GetChild(0).transform.childCount; i++)
         {
             bool lineDone = true;
@@ -484,7 +484,7 @@ public class GridClass
 
         for(int i=0; i<linesDone.Count; i++)
         {
-            Debug.Log("Line " + i + " done");
+            //Debug.Log("Line " + i + " done");
         }
 
         if(linesDone.Count>0)
@@ -522,20 +522,27 @@ public class GridClass
     private void MoveDownFullStack(List<int> l, GameObject p) //Con más de triple y tetris la ultima se queda vacia pero no bajan del todo //Mirar de bajar directamente con el count
     {
         l.Sort();
-        for(int i=l.Count-1; i>=0; i--)
+        for(int i=l[l.Count-1]; i>=0; i--)
         {
-            for(int x=l[i]; x>=0; x--)
+            for (int j = 0; j < grid[i].row.Count; j++)
             {
-                for (int j = 0; j < grid[x].row.Count; j++)
+                if (grid[i].row[j] != null && grid[i].row[j].gameObject.transform.parent.transform.parent != p)
                 {
-                    if (grid[x].row[j] != null && grid[x].row[j].gameObject.transform.parent.transform.parent != p)
-                    {
-                        grid[Mathf.Abs((int)grid[x].row[j].gameObject.transform.position.y - 1)].row[j] = grid[x].row[j];
-                        grid[x].row[j].gameObject.transform.position -= new Vector3(0.0f, 1.0f, 0.0f);
-                        grid[x].row[j] = null;
-                    }
+                    grid[Mathf.Abs((int)grid[i].row[j].gameObject.transform.position.y - l.Count)].row[j] = grid[i].row[j];
+                    grid[i].row[j].gameObject.transform.position -= new Vector3(0.0f, l.Count, 0.0f);
+                    grid[i].row[j] = null;
                 }
             }
+        }
+
+
+
+        GameObject[] list = GameObject.FindGameObjectsWithTag("Piece");
+        Debug.Log("Piecas a revisar : " + list.Length);
+
+        foreach(GameObject go in list)
+        {
+            go.GetComponent<Piece>().CheckIfNeedAutodestroy();
         }
     }
 
