@@ -23,12 +23,17 @@ public class GridController : MonoBehaviour
     [SerializeField] private GameObject placeHolder;
 
     [Header("Game Settings")]
+    [SerializeField] private List<Vector2> speedSettings=new List<Vector2>();
+    [SerializeField] private int speedSetCont;
     [SerializeField] private int currentLevel;
+    [SerializeField] private int currentScore;
+    [SerializeField] private int currentLineCount;
     [SerializeField] private float currentMoveTime;
     [SerializeField] private float auxCurrentMoveTime;
     [SerializeField] private int contAccelerate;
     private float lastTimeMovedStandard;
     public GameObject currentPiece;
+    public GameObject nextPiece;
 
 
 
@@ -37,6 +42,11 @@ public class GridController : MonoBehaviour
     {
         gridClass=new GridClass(sizeX, sizeY, null, piecePrefabs, placeHolder);
 
+        currentScore = 0;
+        currentLineCount = 0;
+        speedSetCont = 0;
+        currentLevel = (int)speedSettings[speedSetCont].x;
+        currentMoveTime = speedSettings[speedSetCont].y;
 
         gridClass.DrawTransLucidGrid(placeHoldersParent);
         SpawnNewPiece();
@@ -55,7 +65,33 @@ public class GridController : MonoBehaviour
         {
             if(gridClass.MovePiece(ref currentPiece, Direction.DOWN))
             {
-                gridClass.CheckLine(ref currentPiece);
+                int auxScore = gridClass.CheckLine(ref currentPiece);
+                currentLineCount += auxScore;
+                switch(auxScore)
+                {
+                    case 0:
+                        
+                        break;
+                    case 1:
+                        currentScore += 40 * currentLevel;
+                        break;
+                    case 2:
+                        currentScore += 80 * currentLevel;
+                        break;
+                    case 3:
+                        currentScore += 120 * currentLevel;
+                        break;
+                    case 4:
+                        currentScore += 400 * currentLevel;
+                        break;
+                }
+                if(currentLineCount >= (currentLevel * 10) + 10 && (currentLevel>=1 && currentLevel<19))
+                {
+                    speedSetCont++;
+                    currentLineCount = 0;
+                    currentLevel = (int)speedSettings[speedSetCont].x;
+                    currentMoveTime = speedSettings[speedSetCont].y;
+                }
                 SpawnNewPiece();
             }
 

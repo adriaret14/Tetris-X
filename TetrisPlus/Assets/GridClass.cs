@@ -456,7 +456,7 @@ public class GridClass
         return canMove;
     }
 
-    public void CheckLine(ref GameObject p)
+    public int CheckLine(ref GameObject p)
     {
         List<int> linesDone = new List<int>();
 
@@ -492,6 +492,8 @@ public class GridClass
             DestroyLines(linesDone, p);
         }
         
+
+        return linesDone.Count;
     }
 
     private void DestroyLines(List<int> lines, GameObject p)
