@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Direction { LEFT, RIGHT, DOWN }
 
@@ -35,6 +36,10 @@ public class GridController : MonoBehaviour
     public GameObject currentPiece;
     public GameObject nextPiece;
 
+    [Header("Game UI")]
+    [SerializeField] private Text _fLevel;
+    [SerializeField] private Text _fScore;
+    [SerializeField] private Text _fLines;
 
 
     // Start is called before the first frame update
@@ -47,6 +52,10 @@ public class GridController : MonoBehaviour
         speedSetCont = 0;
         currentLevel = (int)speedSettings[speedSetCont].x;
         currentMoveTime = speedSettings[speedSetCont].y;
+
+        _fScore.text = currentScore.ToString();
+        _fLines.text = currentLineCount.ToString();
+        _fLevel.text = currentLevel.ToString();
 
         gridClass.DrawTransLucidGrid(placeHoldersParent);
         SpawnNewPiece();
@@ -94,6 +103,10 @@ public class GridController : MonoBehaviour
                 }
                 SpawnNewPiece();
             }
+
+            _fScore.text = currentScore.ToString();
+            _fLines.text = currentLineCount.ToString();
+            _fLevel.text = currentLevel.ToString();
 
             lastTimeMovedStandard = Time.time;
         }

@@ -1432,6 +1432,9 @@ MonoBehaviour:
   contAccelerate: 0
   currentPiece: {fileID: 0}
   nextPiece: {fileID: 0}
+  _fLevel: {fileID: 1849699225}
+  _fScore: {fileID: 1731570251}
+  _fLines: {fileID: 1426266492}
 --- !u!4 &1316086944
 Transform:
   m_ObjectHideFlags: 0
